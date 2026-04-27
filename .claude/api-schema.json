@@ -1,0 +1,61 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Office Assistant Web API Client",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Development backend"
+    },
+    {
+      "url": "https://api.office-assistant.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/chat": {
+      "post": {
+        "summary": "Send message to agent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": { "type": "string" },
+                  "conversationId": { "type": "string", "format": "uuid" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Message response" }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "summary": "Upload document",
+        "requestBody": {
+          "required": true,
+          "content": { "multipart/form-data": {} }
+        },
+        "responses": {
+          "201": { "description": "Upload success" }
+        }
+      }
+    },
+    "/conversations": {
+      "get": {
+        "summary": "List conversations",
+        "responses": {
+          "200": { "description": "Conversations list" }
+        }
+      }
+    }
+  }
+}

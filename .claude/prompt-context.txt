@@ -1,0 +1,49 @@
+# .claude/prompt-context.txt - office-assistant-web
+
+## Project: Office Assistant Web Frontend
+
+Modern React/Next.js frontend for office-assistant-agent backend.
+
+**Stack:** Next.js 16, React 19, TypeScript, Chakra UI, Zustand, React Query
+
+## Architecture
+
+```
+Next.js App Router
+├─ Chakra UI (Components)
+├─ Zustand (Client state)
+├─ React Query (Server state)
+├─ React Hook Form (Forms)
+├─ Axios (HTTP)
+└─ Sonner (Notifications)
+```
+
+## Key Files
+- `app/` - Next.js pages and layouts
+- `components/` - React components
+- `hooks/` - Custom hooks
+- `store/` - Zustand stores
+- `services/` - API calls and queries
+- `types/` - TypeScript types
+- `lib/` - Utilities and configuration
+
+## DO's
+✅ Use Chakra UI components
+✅ Use React Query for server state
+✅ Use Zustand for client state
+✅ Use React Hook Form for forms
+✅ Use Zod for validation
+✅ Use Axios for API calls
+✅ Use error-boundary for errors
+✅ Show loading and error states
+
+## DON'Ts
+❌ Use styled-components or Tailwind
+❌ Use Redux or Context API
+❌ Use fetch() directly
+❌ Use class components
+❌ Use Pages Router
+❌ Fetch in useEffect
+❌ Prop drilling
+❌ Custom CSS
+
