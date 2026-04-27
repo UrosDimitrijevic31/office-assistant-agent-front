@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "name": "Office Assistant",
+    "tagline": "Your AI-powered office companion",
+    "description": "Manage emails, calendar, documents and tasks — all in one intelligent workspace.",
+    "copyright": "© 2026 Office Assistant. All rights reserved.",
+    "features": [
+      "Smart email management",
+      "Calendar & scheduling",
+      "Document handling",
+      "Task automation"
+    ]
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to your account to continue",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@company.com",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot password?",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "noAccount": "Don't have an account?",
+    "createOne": "Create one",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "errors": {
+    "emailInvalid": "Invalid email address",
+    "passwordTooShort": "Password must be at least 8 characters"
+  }
+}

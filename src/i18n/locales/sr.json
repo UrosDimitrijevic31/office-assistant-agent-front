@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "name": "Office Assistant",
+    "tagline": "Vaš AI asistent za kancelariju",
+    "description": "Upravljajte imejlovima, kalendarom, dokumentima i zadacima — sve na jednom pametnom radnom prostoru.",
+    "copyright": "© 2026 Office Assistant. Sva prava zadržana.",
+    "features": [
+      "Pametno upravljanje imejlovima",
+      "Kalendar i zakazivanje",
+      "Upravljanje dokumentima",
+      "Automatizacija zadataka"
+    ]
+  },
+  "login": {
+    "title": "Dobrodošli nazad",
+    "subtitle": "Prijavite se na vaš nalog da biste nastavili",
+    "emailLabel": "Email adresa",
+    "emailPlaceholder": "vi@kompanija.com",
+    "passwordLabel": "Lozinka",
+    "forgotPassword": "Zaboravili ste lozinku?",
+    "submit": "Prijavite se",
+    "submitting": "Prijavljivanje…",
+    "noAccount": "Nemate nalog?",
+    "createOne": "Napravite nalog",
+    "showPassword": "Prikaži lozinku",
+    "hidePassword": "Sakrij lozinku"
+  },
+  "errors": {
+    "emailInvalid": "Nevažeća email adresa",
+    "passwordTooShort": "Lozinka mora imati najmanje 8 karaktera"
+  }
+}

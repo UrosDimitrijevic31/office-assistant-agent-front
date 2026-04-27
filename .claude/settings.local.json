@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npx next *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Bash(grep -E \"\\\\.\\(tsx|ts|jsx|js\\)$\")"
     ]
   }
 }
