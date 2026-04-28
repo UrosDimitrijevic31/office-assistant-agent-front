@@ -48,3 +48,41 @@ export function useSignOut() {
     onSuccess: () => queryClient.setQueryData(["session"], null),
   });
 }
+
+export function useUpdateUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: { name?: string; image?: string }) => {
+      const result = await authClient.updateUser(data);
+      if (result.error) throw result.error;
+      return result.data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+  });
+}
+
+export function useChangeEmail() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: { newEmail: string; callbackURL?: string }) => {
+      const result = await authClient.changeEmail(data);
+      if (result.error) throw result.error;
+      return result.data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: async (data: {
+      currentPassword: string;
+      newPassword: string;
+      revokeOtherSessions?: boolean;
+    }) => {
+      const result = await authClient.changePassword(data);
+      if (result.error) throw result.error;
+      return result.data;
+    },
+  });
+}

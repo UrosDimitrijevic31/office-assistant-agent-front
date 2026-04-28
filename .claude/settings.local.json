@@ -5,7 +5,9 @@
       "Bash(node *)",
       "Bash(npm install *)",
       "Bash(grep -E \"\\\\.\\(tsx|ts|jsx|js\\)$\")",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(rm src/features/dashboard/profile/profile-page.tsx src/features/dashboard/settings/settings-page.tsx src/features/dashboard/preferences/preferences-page.tsx)",
+      "Bash(rmdir src/features/dashboard/profile src/features/dashboard/settings src/features/dashboard/preferences)"
     ]
   }
 }
