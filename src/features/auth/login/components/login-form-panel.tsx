@@ -21,22 +21,31 @@ import { loginSchema, type LoginFormValues } from "../login-schema";
 import { LoginHeader } from "./login-header";
 import { MobileLogo } from "./mobile-logo";
 import { PasswordInput } from "./password-input";
+import { useSignIn } from "@/features/auth/auth.hooks";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function LoginFormPanel() {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const signIn = useSignIn();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    try {
+      await signIn.mutateAsync({ email: data.email, password: data.password });
+      router.push("/dashboard");
+    } catch {
+      toast.error("Prijava nije uspela. Proverite email i lozinku.");
+    }
   };
 
   return (
@@ -118,7 +127,7 @@ export function LoginFormPanel() {
               type="submit"
               w="full"
               size="lg"
-              loading={isSubmitting}
+              loading={signIn.isPending}
               loadingText={t("login.submitting")}
               borderRadius="lg"
               fontWeight="semibold"

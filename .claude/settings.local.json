@@ -4,7 +4,8 @@
       "Bash(npx next *)",
       "Bash(node *)",
       "Bash(npm install *)",
-      "Bash(grep -E \"\\\\.\\(tsx|ts|jsx|js\\)$\")"
+      "Bash(grep -E \"\\\\.\\(tsx|ts|jsx|js\\)$\")",
+      "Bash(npx tsc *)"
     ]
   }
 }
