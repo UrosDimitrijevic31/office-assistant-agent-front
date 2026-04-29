@@ -3,6 +3,7 @@
 import { Flex, Icon, Text } from "@chakra-ui/react";
 import { Monitor } from "lucide-react";
 import { UserMenu } from "./user-menu";
+import { redirect } from "next/navigation";
 
 export function DashboardHeader() {
   return (
@@ -26,7 +27,12 @@ export function DashboardHeader() {
           justifyContent="center"
           flexShrink={0}
         >
-          <Icon as={Monitor} boxSize={4} color="white" />
+          <Icon
+            as={Monitor}
+            boxSize={4}
+            color="white"
+            onClick={() => redirect("/chat")}
+          />
         </Flex>
 
         <Text fontWeight="semibold" fontSize="sm" letterSpacing="-0.01em">

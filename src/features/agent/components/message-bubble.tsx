@@ -1,8 +1,8 @@
 "use client";
 
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Text } from "@chakra-ui/react";
+import { Bot } from "lucide-react";
 import { ApprovalPreviewCard } from "./approval-preview-card";
-import { AiAvatar } from "./chat-window";
 import type { ChatMessage } from "../agent.types";
 
 interface MessageBubbleProps {
@@ -11,80 +11,109 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === "user";
+  return isUser ? <UserMessage message={message} /> : <AssistantMessage message={message} />;
+}
 
+function UserMessage({ message }: { message: ChatMessage }) {
   return (
-    <Flex
-      justifyContent={isUser ? "flex-end" : "flex-start"}
-      alignItems="flex-end"
-      gap={3}
+    <Box
+      bg="bg.surface"
+      borderWidth="1px"
+      borderColor="border"
+      borderRadius="xl"
+      px={4}
+      py={3}
     >
-      {!isUser && <AiAvatar />}
-
-      <Box maxW={{ base: "88%", md: "72%" }}>
-        <Box
-          px={4}
-          py={3}
-          borderRadius={isUser ? "2xl 2xl 4px 2xl" : "2xl 2xl 2xl 4px"}
-          bg={
-            isUser
-              ? "gray.900"
-              : message.isError
-                ? "red.50"
-                : "bg.surface"
-          }
-          borderWidth={isUser ? "0" : "1px"}
-          borderColor={message.isError ? "red.200" : "border"}
-          _dark={{
-            bg: isUser
-              ? "gray.100"
-              : message.isError
-                ? "rgba(220,38,38,0.08)"
-                : "bg.surface",
-          }}
+      <Flex gap={3} alignItems="flex-start">
+        <Flex
+          w={8}
+          h={8}
+          borderRadius="full"
+          bg="purple.600"
+          alignItems="center"
+          justifyContent="center"
+          flexShrink={0}
+          fontSize="xs"
+          fontWeight="bold"
+          color="white"
+          letterSpacing="0.05em"
         >
-          <Text
-            fontSize="sm"
-            lineHeight="1.75"
-            whiteSpace="pre-wrap"
-            color={
-              isUser ? "white" : message.isError ? "red.700" : "text"
-            }
-            _dark={{
-              color: isUser
-                ? "gray.900"
-                : message.isError
-                  ? "red.400"
-                  : "text",
-            }}
-          >
+          VI
+        </Flex>
+
+        <Box flex="1" minW={0}>
+          <Flex alignItems="baseline" gap={2} mb={1}>
+            <Text fontSize="sm" fontWeight="semibold">Vi</Text>
+            <Text fontSize="xs" color="text.muted">{formatTime(message.createdAt)}</Text>
+          </Flex>
+          <Text fontSize="sm" lineHeight="1.75" whiteSpace="pre-wrap">
             {message.content}
           </Text>
         </Box>
+      </Flex>
+    </Box>
+  );
+}
 
-        {message.approval && (
-          <ApprovalPreviewCard
-            approvalId={message.approval.approvalId}
-            intent={message.approval.intent}
-            preview={message.approval.preview}
-          />
-        )}
+function AssistantMessage({ message }: { message: ChatMessage }) {
+  return (
+    <Flex gap={3} alignItems="flex-start">
+      <Flex
+        w={8}
+        h={8}
+        borderRadius="full"
+        background="linear-gradient(135deg, #4f46e5, #7c3aed)"
+        alignItems="center"
+        justifyContent="center"
+        flexShrink={0}
+      >
+        <Icon as={Bot} boxSize={4} color="white" />
+      </Flex>
+
+      <Box flex="1" minW={0}>
+        <Flex alignItems="baseline" gap={2} mb={1}>
+          <Text fontSize="sm" fontWeight="semibold">Office Assistant</Text>
+          <Text fontSize="xs" color="text.muted">{formatTime(message.createdAt)}</Text>
+        </Flex>
 
         <Text
-          fontSize="xs"
-          color="text.muted"
-          mt={1}
-          textAlign={isUser ? "right" : "left"}
+          fontSize="sm"
+          lineHeight="1.75"
+          whiteSpace="pre-wrap"
+          color={message.isError ? "red.500" : "text"}
+          _dark={{ color: message.isError ? "red.400" : "text" }}
         >
-          {formatTime(message.timestamp)}
+          {message.content}
         </Text>
+
+        {message.approvalData && message.approvalId && (
+          <ApprovalPreviewCard
+            approvalId={message.approvalId}
+            intent={message.approvalData.intent}
+            preview={message.approvalData.preview}
+          />
+        )}
       </Box>
     </Flex>
   );
 }
 
-function formatTime(date: Date): string {
-  return date.toLocaleTimeString("sr-RS", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+export function AiAvatar() {
+  return (
+    <Flex
+      w={8}
+      h={8}
+      borderRadius="full"
+      background="linear-gradient(135deg, #4f46e5, #7c3aed)"
+      alignItems="center"
+      justifyContent="center"
+      flexShrink={0}
+    >
+      <Icon as={Bot} boxSize={4} color="white" />
+    </Flex>
+  );
+}
+
+function formatTime(createdAt: string): string {
+  return new Date(createdAt).toLocaleTimeString("sr-RS", { hour: "2-digit", minute: "2-digit" });
 }

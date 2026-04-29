@@ -16,7 +16,13 @@ export function DashboardPage() {
 
   return (
     <Flex flex="1" alignItems="center" justifyContent="center" p={6}>
-      <Flex flexDirection="column" alignItems="center" gap={3} textAlign="center" maxW="480px">
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        gap={3}
+        textAlign="center"
+        maxW="480px"
+      >
         <Heading
           fontSize={{ base: "2xl", md: "3xl" }}
           fontWeight="bold"

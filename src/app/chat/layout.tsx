@@ -1,4 +1,4 @@
-import { DashboardHeader } from "@/features/dashboard/components/dashboard-header";
+import { WorkspaceTopbar } from "@/features/agent/components/workspace-topbar";
 
 export default function ChatLayout({
   children,
@@ -14,7 +14,7 @@ export default function ChatLayout({
         overflow: "hidden",
       }}
     >
-      <DashboardHeader />
+      <WorkspaceTopbar />
       {children}
     </div>
   );

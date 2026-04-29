@@ -1,57 +1,54 @@
 export type AgentIntent =
+  | "unknown"
   | "schedule_meeting"
   | "send_email"
-  | "create_ticket"
-  | "unknown";
+  | "create_ticket";
 
-export interface ApprovalPreview {
-  title?: string;
-  participants?: string[];
-  [key: string]: unknown;
-}
+export type AgentStatus = "success" | "needs_approval" | "error";
 
-interface AgentBaseResponse {
-  intent: AgentIntent;
-  message: string;
-}
-
-export interface AgentSuccessResponse extends AgentBaseResponse {
-  status: "success";
-}
-
-export interface AgentApprovalResponse extends AgentBaseResponse {
-  status: "needs_approval";
-  data: {
-    approvalId: string;
-    preview: ApprovalPreview;
-  };
-}
-
-export interface AgentErrorResponse extends AgentBaseResponse {
-  status: "error";
-  data?: {
-    error: string;
-  };
-}
+export type ActionIntent = Exclude<AgentIntent, "unknown">;
 
 export type AgentResponse =
-  | AgentSuccessResponse
-  | AgentApprovalResponse
-  | AgentErrorResponse;
+  | {
+      status: "success";
+      intent: "unknown";
+      message: string;
+      data?: undefined;
+    }
+  | {
+      status: "needs_approval";
+      intent: ActionIntent;
+      message: string;
+      data: {
+        approvalId: string;
+        preview: Record<string, unknown>;
+      };
+    }
+  | {
+      status: "error";
+      intent: "unknown";
+      message: string;
+      data?: {
+        error?: string;
+      };
+    };
 
-export type ChatRole = "user" | "assistant";
-
-export interface MessageApproval {
-  approvalId: string;
-  intent: AgentIntent;
-  preview: ApprovalPreview;
-}
-
-export interface ChatMessage {
+export type ChatMessage = {
   id: string;
-  role: ChatRole;
+  role: "user" | "assistant";
   content: string;
-  timestamp: Date;
+  createdAt: string;
   isError?: boolean;
-  approval?: MessageApproval;
-}
+  approvalId?: string;
+  approvalData?: {
+    intent: ActionIntent;
+    preview: Record<string, unknown>;
+  };
+};
+
+export type PendingApproval = {
+  id: string;
+  intent: ActionIntent;
+  preview: Record<string, unknown>;
+  createdAt: string;
+};
